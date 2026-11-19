@@ -1,0 +1,8 @@
+name = "triz-wf"
+compatibility_date = "2026-11-19"
+pages_build_output_dir = "."
+
+[vars]
+# Адрес бэкенда (Modal FastAPI), без завершающего слеша.
+# Устанавливается после развёртывания Фазы 2.
+# TRIZ_SOLVER_API = "https://<modal-endpoint>"

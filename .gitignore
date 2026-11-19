@@ -1,0 +1,26 @@
+# Node / Cloudflare
+node_modules/
+.wrangler/
+.dev.vars
+dist/
+.vercel/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Secrets / local config
+.env
+.env.*
+!.env.example
+*.local
+
+# OS
+.DS_Store
+
+# Modal
+.momentum/
+*.modal.toml.local

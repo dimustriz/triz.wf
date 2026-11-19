@@ -8,8 +8,6 @@
 
   var W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
   var BG_COLORS = ['#57b8ff', '#9b7bff', '#ffd166'];
-  var FACE_BASE = [[87, 184, 255], [155, 123, 255], [255, 209, 102]];
-  var PHOS = [0, 255, 65];
 
   var bg = [];
   var face = [];
@@ -102,7 +100,7 @@
         x: Math.random() * W, y: Math.random() * H,
         vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
         r: 1.6,
-        base: FACE_BASE[i % FACE_BASE.length],
+        c: BG_COLORS[i % BG_COLORS.length],
         homeX: null, homeY: null,
       });
     }
@@ -191,14 +189,11 @@
       var dx = p.x + (p.homeX - p.x) * f;
       var dy = p.y + (p.homeY - p.y) * f;
 
-      var base = p.base;
-      var rr = Math.round(base[0] + (PHOS[0] - base[0]) * f);
-      var gg = Math.round(base[1] + (PHOS[1] - base[1]) * f);
-      var bb = Math.round(base[2] + (PHOS[2] - base[2]) * f);
-      ctx.fillStyle = 'rgb(' + rr + ',' + gg + ',' + bb + ')';
-      ctx.globalAlpha = f > 0.05 ? Math.min(1, 0.5 + f * 0.5) : 0.35;
+      var r = 1.6 + (faceScale * 0.55 - 1.6) * f;
+      ctx.fillStyle = p.c;
+      ctx.globalAlpha = f > 0.05 ? Math.min(1, 0.5 + f * 0.5) : 0.45;
       ctx.beginPath();
-      ctx.arc(dx, dy, p.r, 0, Math.PI * 2);
+      ctx.arc(dx, dy, r, 0, Math.PI * 2);
       ctx.fill();
       ctx.globalAlpha = 1;
     }

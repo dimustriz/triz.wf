@@ -71,8 +71,14 @@ body::after {
   margin: 0 auto; padding: 2rem 1.25rem 3rem;
 }
 
-/* Guide spacer — the oracle assembles from the background here */
-.guide { height: 96px; margin-bottom: 1.25rem; }
+/* Guide anchor — the oracle assembles from the background here */
+.guide { width: 128px; height: 128px; margin: 0 auto 1.5rem; }
+@media (min-width: 1200px) {
+  .guide {
+    position: fixed; left: 2.5rem; top: 50%; transform: translateY(-50%);
+    width: 192px; height: 192px; margin: 0;
+  }
+}
 
 /* Glass panel */
 .card {

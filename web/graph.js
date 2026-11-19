@@ -8,11 +8,11 @@
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
-  var DARK_COLORS = ['#57b8ff', '#9b7bff', '#ffd166'];
-  var LIGHT_COLORS = ['#0a6cf5', '#7c3aed', '#b45309'];
-  var DARK_EDGE = '87, 184, 255';
-  var LIGHT_EDGE = '10, 108, 245';
-  var COLORS = DARK_COLORS;
+  var DARK_DOT = '#6fbaff';
+  var LIGHT_DOT = '#47617f';
+  var DOT_COLOR = DARK_DOT;
+  var DARK_EDGE = '111, 186, 255';
+  var LIGHT_EDGE = '71, 97, 127';
   var EDGE_RGB = DARK_EDGE;
   var R = 10; // skull radius (world units)
 
@@ -126,7 +126,6 @@
         x: Math.random() * W, y: Math.random() * H,
         vx: (Math.random() - 0.5) * 0.28, vy: (Math.random() - 0.5) * 0.28,
         r: 1 + Math.random() * 2.4,
-        ci: (Math.random() * 3) | 0,
         phase: Math.random() * Math.PI * 2,
       });
     }
@@ -138,7 +137,6 @@
       face.push({
         x: Math.random() * W, y: Math.random() * H,
         vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
-        ci: i % 3,
         hx: null, hy: null, hz: null,
       });
     }
@@ -215,7 +213,7 @@
       if (n.x < -20) n.x = W + 20; else if (n.x > W + 20) n.x = -20;
       if (n.y < -20) n.y = H + 20; else if (n.y > H + 20) n.y = -20;
       var pulse = 0.5 + 0.5 * Math.sin(n.phase + now / 900) + burst;
-      ctx.fillStyle = COLORS[n.ci];
+      ctx.fillStyle = DOT_COLOR;
       ctx.globalAlpha = Math.min(1, 0.45 + pulse * 0.4);
       ctx.beginPath();
       ctx.arc(n.x, n.y, n.r + burst * 0.9, 0, Math.PI * 2);
@@ -242,7 +240,7 @@
       var size = 1.6 + (dSize - 1.6) * f;
       var alpha = 0.45 + (dAlpha - 0.45) * f;
 
-      ctx.fillStyle = COLORS[p.ci];
+      ctx.fillStyle = DOT_COLOR;
       ctx.globalAlpha = alpha;
       ctx.beginPath();
       ctx.arc(dx, dy, size, 0, Math.PI * 2);
@@ -268,7 +266,7 @@
   if (reduceMotion) { frame(performance.now()); } else { requestAnimationFrame(frame); }
 
   function setTheme(mode) {
-    COLORS = mode === 'light' ? LIGHT_COLORS : DARK_COLORS;
+    DOT_COLOR = mode === 'light' ? LIGHT_DOT : DARK_DOT;
     EDGE_RGB = mode === 'light' ? LIGHT_EDGE : DARK_EDGE;
   }
   setTheme((document.documentElement.getAttribute('data-theme') || 'dark') === 'light' ? 'light' : 'dark');

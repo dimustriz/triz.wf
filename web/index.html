@@ -8,18 +8,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Sora:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
-    <canvas id="hologram" aria-hidden="true"></canvas>
+    <div class="aurora" aria-hidden="true">
+      <span class="blob blob-1"></span>
+      <span class="blob blob-2"></span>
+      <span class="blob blob-3"></span>
+    </div>
 
     <header class="site-header">
       <a class="brand" href="/">triz<span>.wf</span></a>
       <div class="header-meta">
-        <span class="meta-item">VOLUMETRIC · HOLOGRAM</span>
+        <span class="meta-item">AURORA · FLUID MESH</span>
         <span class="meta-item meta-live"><span class="dot"></span>STANDBY</span>
       </div>
     </header>
@@ -31,7 +35,6 @@
     </footer>
 
     <noscript><p class="noscript">Для работы мастера включите JavaScript.</p></noscript>
-    <script type="module" src="/hologram.js"></script>
     <script src="/app.js"></script>
   </body>
 </html>

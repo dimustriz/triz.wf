@@ -282,7 +282,7 @@ function renderNav() {
 
 function bind() {
   app.querySelectorAll('input[name="mode"]').forEach(function (el) {
-    el.addEventListener('change', function () { state.mode = el.value; });
+    el.addEventListener('change', function () { state.mode = el.value; if (window.TrizFace) window.TrizFace.set('surprised'); });
   });
   var problem = app.querySelector('#problem');
   if (problem) problem.addEventListener('input', function () { state.problem = problem.value; });
@@ -301,11 +301,12 @@ function onAction(action) {
     render();
     return;
   }
-  if (action === 'back') { state.step = Math.max(0, state.step - 1); render(); return; }
+  if (action === 'back') { state.step = Math.max(0, state.step - 1); if (window.TrizFace) window.TrizFace.set('idle'); render(); return; }
   if (action === 'next') {
     if (state.step === 1 && !state.problem.trim()) return;
     if (state.step === 3) return submit();
     state.step += 1;
+    if (window.TrizFace) window.TrizFace.set('thinking');
     render();
   }
 }
@@ -349,5 +350,6 @@ window.TrizApp = {
 };
 
 render();
+if (window.TrizFace) window.TrizFace.set('idle');
 
 

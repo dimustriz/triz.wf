@@ -23,17 +23,17 @@
   var EMOTIONS = ['idle', 'thinking', 'happy', 'sad', 'surprised'];
   var emotion = 'idle';
   var burst = 0;
-  var cycleStart = performance.now();
+  var reactStart = -1e9;
 
-  var ASSEMBLE = 1500, HOLD = 5000, DISPERSE = 1200, WANDER = 10000;
-  var TOTAL = ASSEMBLE + HOLD + DISPERSE + WANDER;
+  var ASSEMBLE = 900, HOLD = 2400, DISPERSE = 900;
 
   var faceCX = 0, faceCY = 0, faceScale = 3;
 
   function ease(x) { return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2; }
 
   function F(now) {
-    var t = (now - cycleStart) % TOTAL;
+    var t = now - reactStart;
+    if (t < 0) return 0;
     if (t < ASSEMBLE) return ease(t / ASSEMBLE);
     if (t < ASSEMBLE + HOLD) return 1;
     if (t < ASSEMBLE + HOLD + DISPERSE) return 1 - ease((t - ASSEMBLE - HOLD) / DISPERSE);
@@ -291,7 +291,7 @@
         p.y = p.y + (pr.y - p.y) * f;
       }
       assignHomes();
-      cycleStart = performance.now();
+      reactStart = performance.now();
     },
   };
 })();

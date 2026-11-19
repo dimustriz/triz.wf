@@ -40,7 +40,7 @@ function render() {
   app.innerHTML = `
     <section class="card">
       <header class="step-head">
-        <span class="step-count">Шаг ${state.step + 1} из ${STEPS.length}</span>
+        <span class="step-count">STEP ${String(state.step + 1).padStart(2, '0')} / ${String(STEPS.length).padStart(2, '0')}</span>
         <h1>${s.title}</h1>
         <p class="step-subtitle">${s.subtitle}</p>
       </header>

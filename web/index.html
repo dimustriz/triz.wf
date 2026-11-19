@@ -5,18 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>triz.wf — TRIZ-решатель на базе ИИ</title>
     <meta name="description" content="Анти-компромиссный R&D-решатель: ТРИЗ, патентные графы и LLM." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="bg-scanlines" aria-hidden="true"></div>
+
+    <div class="hud hud-bl" aria-hidden="true">CROSS-DOMAIN PATENT GRAPH</div>
+    <div class="hud hud-br" aria-hidden="true">ZERO-IDLE-COST · REV 0.1.0</div>
+
     <header class="site-header">
       <a class="brand" href="/">triz<span>.wf</span></a>
-      <p class="tagline">Анти-компромиссный R&amp;D-решатель</p>
+      <div class="header-meta">
+        <span class="meta-item">MODE: R&amp;D SOLVER</span>
+        <span class="meta-item meta-live"><span class="dot"></span>STANDBY</span>
+      </div>
     </header>
 
     <main id="app" class="app" aria-live="polite"></main>
 
     <footer class="site-footer">
-      <p>ТРИЗ · межотраслевой патентный поиск · агент-критик</p>
+      <p>TRIZ · CROSS-DOMAIN PATENT SEARCH · ADVERSARIAL CRITIC</p>
     </footer>
 
     <noscript><p class="noscript">Для работы мастера включите JavaScript.</p></noscript>

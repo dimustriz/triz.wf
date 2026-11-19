@@ -1,5 +1,5 @@
-// Pixel "Dr. Know" face — a dynamic smiley showing basic emotions.
-// Rendered on a 32x32 canvas and upscaled with image-rendering: pixelated.
+// Pixel "Dr. Know" face — a calm Matrix-green oracle with round glasses.
+// Rendered on a 32x32 canvas, upscaled with image-rendering: pixelated.
 (function () {
   var canvas = document.getElementById('face');
   if (!canvas) return;
@@ -9,18 +9,19 @@
 
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  var HEAD = '#bff2ff', EDGE = '#6fc9d8', INK = '#0a2530', AMBER = '#ffb84d';
+  var BG = '#03130a';    // dark green-black screen
+  var PHOS = '#00ff41';  // bright phosphor green
   var EMOTIONS = ['idle', 'thinking', 'happy', 'sad', 'surprised'];
   var emotion = 'idle';
   var blinkMs = 0;
-  var nextBlink = 2000;
+  var nextBlink = 3000;
 
   function px(x, y, w, h, color) {
     ctx.fillStyle = color;
     ctx.fillRect(x, y, w, h);
   }
 
-  function ellipse(cx, cy, rx, ry, color) {
+  function ellipseFill(cx, cy, rx, ry, color) {
     ctx.fillStyle = color;
     for (var y = -ry; y <= ry; y++) {
       var w = Math.round(rx * Math.sqrt(Math.max(0, 1 - (y * y) / (ry * ry))));
@@ -28,47 +29,55 @@
     }
   }
 
+  function ring(cx, cy, r) {
+    ellipseFill(cx, cy, r, r, PHOS);
+    ellipseFill(cx, cy, r - 1, r - 1, BG);
+  }
+
   function drawHead() {
-    ellipse(16, 16, 13, 13, EDGE);
-    ellipse(16, 16, 12, 12, HEAD);
+    ellipseFill(16, 16, 12, 12, PHOS);
+    ellipseFill(16, 16, 11, 11, BG);
+  }
+
+  function drawGlasses() {
+    ring(11, 15, 4);
+    ring(21, 15, 4);
+    px(13, 13, 6, 1, PHOS); // bridge
   }
 
   function drawEyes() {
-    if (blinkMs > 0) { px(10, 16, 3, 1, INK); px(19, 16, 3, 1, INK); return; }
-    if (emotion === 'surprised') { px(9, 14, 3, 3, INK); px(20, 14, 3, 3, INK); }
-    else if (emotion === 'happy') { px(10, 15, 3, 1, INK); px(19, 15, 3, 1, INK); }
-    else if (emotion === 'thinking') {
-      var look = Math.floor(Date.now() / 500) % 2;
-      px(11 + look, 15, 2, 2, INK); px(19 + look, 15, 2, 2, INK);
+    if (blinkMs > 0) return; // closed (calm blink)
+    var gaze = emotion === 'thinking' ? (Math.floor(Date.now() / 2500) % 3) - 1 : 0;
+    if (emotion === 'surprised') {
+      px(9 + gaze, 14, 2, 2, PHOS);
+      px(20 + gaze, 14, 2, 2, PHOS);
+    } else {
+      px(10 + gaze, 15, 2, 1, PHOS); // half-lidded, calm
+      px(20 + gaze, 15, 2, 1, PHOS);
     }
-    else { px(10, 15, 2, 2, INK); px(20, 15, 2, 2, INK); }
-  }
-
-  function drawBrows() {
-    if (blinkMs > 0) return;
-    if (emotion === 'sad') { px(9, 12, 4, 1, INK); px(19, 13, 4, 1, INK); }
-    else if (emotion === 'surprised') { px(9, 11, 4, 1, INK); px(19, 11, 4, 1, INK); }
-    else if (emotion === 'thinking') { px(9, 12, 4, 1, INK); px(19, 11, 4, 1, INK); }
-    else if (emotion === 'happy') { /* relaxed, no brows */ }
-    else { px(9, 12, 4, 1, INK); px(19, 12, 4, 1, INK); }
   }
 
   function drawMouth() {
-    if (emotion === 'happy') {
-      px(12, 23, 2, 1, INK); px(18, 23, 2, 1, INK); px(12, 24, 8, 1, INK);
-      px(8, 19, 2, 1, AMBER); px(22, 19, 2, 1, AMBER);
-    }
-    else if (emotion === 'sad') { px(12, 23, 8, 1, INK); px(12, 24, 2, 1, INK); px(18, 24, 2, 1, INK); }
-    else if (emotion === 'surprised') { px(15, 23, 2, 2, INK); }
-    else if (emotion === 'thinking') { px(15, 23, 2, 1, INK); }
-    else { px(13, 24, 6, 1, INK); }
+    if (emotion === 'happy') { px(12, 23, 2, 1, PHOS); px(18, 23, 2, 1, PHOS); px(12, 24, 8, 1, PHOS); }
+    else if (emotion === 'sad') { px(12, 23, 8, 1, PHOS); px(12, 24, 2, 1, PHOS); px(18, 24, 2, 1, PHOS); }
+    else if (emotion === 'surprised') { px(15, 23, 2, 2, PHOS); }
+    else if (emotion === 'thinking') { px(15, 23, 2, 1, PHOS); }
+    else { px(13, 23, 6, 1, PHOS); }
   }
 
   function draw() {
     ctx.clearRect(0, 0, S, S);
+    px(0, 0, S, S, BG);
+
+    // gentle breathing glow
+    var breath = 0.5 + 0.5 * Math.sin(performance.now() / 3200);
+    ctx.globalAlpha = 0.05 + 0.04 * breath;
+    ellipseFill(16, 16, 13, 13, PHOS);
+    ctx.globalAlpha = 1;
+
     drawHead();
+    drawGlasses();
     drawEyes();
-    drawBrows();
     drawMouth();
   }
 
@@ -81,7 +90,7 @@
   function loop(now) {
     var dt = now - last; last = now;
     nextBlink -= dt;
-    if (nextBlink <= 0) { blinkMs = 120; nextBlink = 2200 + Math.random() * 2200; }
+    if (nextBlink <= 0) { blinkMs = 110; nextBlink = 4200 + Math.random() * 2600; }
     if (blinkMs > 0) blinkMs -= dt;
     draw();
     requestAnimationFrame(loop);

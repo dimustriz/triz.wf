@@ -17,7 +17,10 @@
     <div class="bg-grid" aria-hidden="true"></div>
 
     <header class="site-header">
-      <a class="brand" href="/">triz<span>.wf</span></a>
+      <div class="brand-row">
+        <canvas id="face" width="32" height="32" aria-hidden="true"></canvas>
+        <a class="brand" href="/">triz<span>.wf</span></a>
+      </div>
       <div class="telemetry" aria-hidden="true">
         <div class="metric">
           <span class="metric-label">CONTRADICTION</span>
@@ -36,11 +39,6 @@
 
     <main class="app" aria-live="polite">
       <div id="app"></div>
-
-      <details class="reference" open>
-        <summary>40 ИЗОБРЕТАТЕЛЬСКИХ ПРИНЦИПОВ</summary>
-        <div id="principles-grid" class="principles-grid"></div>
-      </details>
     </main>
 
     <aside class="rail" aria-hidden="true">
@@ -56,6 +54,7 @@
 
     <noscript><p class="noscript">Для работы мастера включите JavaScript.</p></noscript>
     <script src="/dashboard.js"></script>
+    <script src="/face.js"></script>
     <script src="/app.js"></script>
   </body>
 </html>

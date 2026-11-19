@@ -197,33 +197,15 @@ textarea::placeholder { color: #4b5563; }
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* Reference: 40 principles */
-.reference {
-  margin-top: 1rem;
-  background: var(--panel);
+/* Pixel face avatar */
+.brand-row { display: flex; align-items: center; gap: 0.6rem; }
+#face {
+  width: 40px; height: 40px;
+  image-rendering: pixelated;
+  background: var(--panel-2);
   border: 1px solid var(--line);
-  border-radius: 4px;
+  border-radius: 6px;
 }
-.reference summary {
-  cursor: pointer; list-style: none;
-  padding: 0.75rem 1rem;
-  font: 600 0.72rem/1 var(--font-mono);
-  letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
-}
-.reference summary::-webkit-details-marker { display: none; }
-.reference summary::before { content: "▾ "; color: var(--amber); }
-.reference[open] summary::before { content: "▴ "; }
-.principles-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem;
-  padding: 0 1rem 1rem;
-}
-.principle {
-  display: flex; gap: 0.5rem; align-items: baseline;
-  background: var(--panel-2); border: 1px solid var(--line); border-radius: 4px;
-  padding: 0.5rem 0.6rem;
-}
-.p-num { font: 600 0.72rem/1 var(--font-mono); color: var(--amber); }
-.p-name { font: 400 0.78rem/1.2 var(--font-sans); }
 
 /* Side rail (desktop) */
 .rail {
@@ -261,9 +243,6 @@ textarea::placeholder { color: #4b5563; }
 
 @media (min-width: 1180px) {
   .rail { display: flex; }
-}
-@media (max-width: 720px) {
-  .principles-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 560px) {
   .mode-grid { grid-template-columns: 1fr; }

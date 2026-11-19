@@ -170,6 +170,7 @@ function bind() {
 async function onAction(action) {
   if (action === 'restart') {
     Object.assign(state, { step: 0, problem: '', context: '', status: 'idle', result: null, error: null });
+    if (window.TrizFace) window.TrizFace.set('idle');
     render();
     return;
   }
@@ -192,6 +193,7 @@ async function submit() {
   state.result = null;
   state.error = null;
   render();
+  if (window.TrizFace) window.TrizFace.set('thinking');
 
   try {
     const res = await fetch('/api/solve', {
@@ -203,9 +205,11 @@ async function submit() {
     try { data = await res.json(); } catch { /* non-JSON */ }
     state.result = data;
     state.status = 'done';
+    if (window.TrizFace) window.TrizFace.set(res.ok && data && data.ok ? 'happy' : 'sad');
   } catch (err) {
     state.error = 'Не удалось достучаться до API: ' + err.message;
     state.status = 'error';
+    if (window.TrizFace) window.TrizFace.set('sad');
   }
   render();
 }

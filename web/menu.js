@@ -47,7 +47,7 @@
         '<summary>' + themeLabel + ' ▾</summary>' +
         '<div class="menu-items">' +
           THEMES.map(function (th) {
-            return '<button data-theme="' + th.id + '"' + (theme === th.id ? ' class="active"' : '') + '>' + th.label + '</button>';
+            return '<button data-theme="' + th.id + '"' + (theme === th.id ? ' class="active"' : '') + '>' + (theme === th.id ? '✓ ' : '') + th.label + '</button>';
           }).join('') +
         '</div>' +
       '</details>' +
@@ -55,7 +55,7 @@
         '<summary>' + langLabel + ' ▾</summary>' +
         '<div class="menu-items">' +
           LANGS.map(function (l) {
-            return '<button data-lang="' + l.id + '"' + (lang === l.id ? ' class="active"' : '') + '>' + l.label + '</button>';
+            return '<button data-lang="' + l.id + '"' + (lang === l.id ? ' class="active"' : '') + '>' + (lang === l.id ? '✓ ' : '') + l.label + '</button>';
           }).join('') +
         '</div>' +
       '</details>';

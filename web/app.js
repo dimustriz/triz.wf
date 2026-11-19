@@ -170,6 +170,7 @@ function bind() {
 async function onAction(action) {
   if (action === 'restart') {
     Object.assign(state, { step: 0, problem: '', context: '', status: 'idle', result: null, error: null });
+    if (window.TrizGraph) window.TrizGraph.calm();
     render();
     return;
   }
@@ -192,6 +193,7 @@ async function submit() {
   state.result = null;
   state.error = null;
   render();
+  if (window.TrizGraph) window.TrizGraph.burst();
 
   try {
     const res = await fetch('/api/solve', {

@@ -1,5 +1,6 @@
-// Unified background + oracle. Wandering constellation elements assemble into
-// the pixel oracle face (Matrix-green), hold, then disperse back to drifting.
+// Unified background + volumetric Einstein oracle. Wandering colored dots
+// assemble into a 3D "Einstein" head (wild hair + mustache), slowly rotating
+// for depth, then disperse back into the background.
 (function () {
   var canvas = document.getElementById('constellation');
   if (!canvas) return;
@@ -7,11 +8,12 @@
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
-  var BG_COLORS = ['#57b8ff', '#9b7bff', '#ffd166'];
+  var COLORS = ['#57b8ff', '#9b7bff', '#ffd166'];
+  var R = 10; // skull radius (world units)
 
   var bg = [];
   var face = [];
-  var MAX_FACE = 300;
+  var MAX_FACE = 640;
 
   var EMOTIONS = ['idle', 'thinking', 'happy', 'sad', 'surprised'];
   var emotion = 'idle';
@@ -33,49 +35,81 @@
     return 0;
   }
 
-  function ellipseFill(g, cx, cy, rx, ry) {
-    for (var y = -ry; y <= ry; y++) {
-      var w = Math.round(rx * Math.sqrt(Math.max(0, 1 - (y * y) / (ry * ry))));
-      if (w > 0) g.fillRect(cx - w, cy + y, w * 2, 1);
+  function blob(pts, cx, cy, spread, n, z) {
+    for (var i = 0; i < n; i++) {
+      pts.push([cx + (Math.random() - 0.5) * spread, cy + (Math.random() - 0.5) * spread, z]);
     }
   }
 
-  function ring(g, cx, cy, rOut, rIn) {
-    g.globalCompositeOperation = 'source-over';
-    g.fillStyle = '#fff';
-    ellipseFill(g, cx, cy, rOut, rOut);
-    g.globalCompositeOperation = 'destination-out';
-    ellipseFill(g, cx, cy, rIn, rIn);
-    g.globalCompositeOperation = 'source-over';
+  function addEyes(pts, emotion, R, shift) {
+    var y = 2;
+    if (emotion === 'happy') {
+      for (var x = -4.5; x <= -2.5; x++) pts.push([x + shift, y, R]);
+      for (var x2 = 2.5; x2 <= 4.5; x2++) pts.push([x2 + shift, y, R]);
+    } else if (emotion === 'surprised') {
+      blob(pts, -3.5 + shift, y, 2.4, 10, R);
+      blob(pts, 3.5 + shift, y, 2.4, 10, R);
+    } else if (emotion === 'sad') {
+      blob(pts, -3.5 + shift, y, 1.4, 5, R);
+      blob(pts, 3.5 + shift, y, 1.4, 5, R);
+      pts.push([-4.5 + shift, y - 1, R]);
+      pts.push([4.5 + shift, y - 1, R]);
+    } else {
+      blob(pts, -3.5 + shift, y, 1.5, 5, R);
+      blob(pts, 3.5 + shift, y, 1.5, 5, R);
+    }
   }
 
-  function faceTargets(emotion) {
-    var c = document.createElement('canvas');
-    c.width = 32; c.height = 32;
-    var g = c.getContext('2d');
+  function addMouth(pts, emotion, R) {
+    var y = -5.5;
+    if (emotion === 'happy') {
+      for (var x = -3; x <= 3; x++) pts.push([x, y + (x * x) * 0.18, R]);
+    } else if (emotion === 'sad') {
+      for (var x = -3; x <= 3; x++) pts.push([x, y - (x * x) * 0.18, R]);
+    } else if (emotion === 'surprised') {
+      blob(pts, 0, y, 1.6, 8, R);
+    } else {
+      for (var x2 = -2; x2 <= 2; x2++) pts.push([x2, y, R]);
+    }
+  }
 
-    ring(g, 16, 16, 12, 10); // head
-    ring(g, 11, 15, 4, 2);   // left lens
-    ring(g, 21, 15, 4, 2);   // right lens
-    g.fillStyle = '#fff';
-    g.fillRect(13, 13, 6, 1); // bridge
-
-    if (emotion === 'surprised') { g.fillRect(9, 14, 2, 2); g.fillRect(20, 14, 2, 2); }
-    else { g.fillRect(10, 15, 2, 1); g.fillRect(20, 15, 2, 1); }
-
-    if (emotion === 'happy') { g.fillRect(12, 23, 2, 1); g.fillRect(18, 23, 2, 1); g.fillRect(12, 24, 8, 1); }
-    else if (emotion === 'sad') { g.fillRect(12, 23, 8, 1); g.fillRect(12, 24, 2, 1); g.fillRect(18, 24, 2, 1); }
-    else if (emotion === 'surprised') { g.fillRect(15, 23, 2, 2); }
-    else if (emotion === 'thinking') { g.fillRect(15, 23, 2, 1); }
-    else { g.fillRect(13, 23, 6, 1); }
-
-    var data = g.getImageData(0, 0, 32, 32).data;
+  function genPoints(emotion) {
     var pts = [];
-    for (var y = 0; y < 32; y++) {
-      for (var x = 0; x < 32; x++) {
-        if (data[(y * 32 + x) * 4 + 3] > 128) pts.push([x, y]);
-      }
+    var shift = emotion === 'thinking' ? 1.6 : 0;
+
+    // skull
+    for (var i = 0; i < 180; i++) {
+      var u = Math.random() * 2 - 1;
+      var th = Math.random() * Math.PI * 2;
+      var s = Math.sqrt(1 - u * u);
+      pts.push([R * s * Math.cos(th), R * s * Math.sin(th), R * u]);
     }
+
+    // wild hair (top/sides/back)
+    for (var j = 0; j < 300; j++) {
+      var uu = Math.random() * 2 - 1;
+      var th2 = Math.random() * Math.PI * 2;
+      var s2 = Math.sqrt(Math.max(0, 1 - uu * uu));
+      var rr = R + 1.5 + Math.random() * 4.5;
+      var y = rr * uu;
+      var x = rr * s2 * Math.cos(th2);
+      var z = rr * s2 * Math.sin(th2);
+      if (y > -R * 0.35 && z < R * 0.4) pts.push([x, y, z]);
+    }
+
+    // nose (protruding)
+    for (var k = 0; k < 14; k++) {
+      pts.push([(Math.random() - 0.5) * 2.2, (Math.random() - 0.5) * 2.2, R + 1.5 + Math.random() * 1.2]);
+    }
+
+    // mustache (bushy)
+    for (var m = 0; m < 44; m++) {
+      pts.push([(Math.random() * 2 - 1) * 5.2, -3 + (Math.random() - 0.5) * 1.6, R + 0.6 + Math.random() * 0.9]);
+    }
+
+    addEyes(pts, emotion, R, shift);
+    addMouth(pts, emotion, R);
+
     return pts;
   }
 
@@ -87,7 +121,7 @@
         x: Math.random() * W, y: Math.random() * H,
         vx: (Math.random() - 0.5) * 0.28, vy: (Math.random() - 0.5) * 0.28,
         r: 1 + Math.random() * 2.4,
-        c: BG_COLORS[(Math.random() * BG_COLORS.length) | 0],
+        c: COLORS[(Math.random() * COLORS.length) | 0],
         phase: Math.random() * Math.PI * 2,
       });
     }
@@ -99,21 +133,21 @@
       face.push({
         x: Math.random() * W, y: Math.random() * H,
         vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
-        r: 1.6,
-        c: BG_COLORS[i % BG_COLORS.length],
-        homeX: null, homeY: null,
+        c: COLORS[i % COLORS.length],
+        hx: null, hy: null, hz: null,
       });
     }
   }
 
   function assignHomes() {
-    var targets = faceTargets(emotion);
+    var targets = genPoints(emotion);
     for (var i = 0; i < face.length; i++) {
       if (i < targets.length) {
-        face[i].homeX = faceCX + (targets[i][0] - 16) * faceScale;
-        face[i].homeY = faceCY + (targets[i][1] - 16) * faceScale;
+        face[i].hx = targets[i][0];
+        face[i].hy = targets[i][1];
+        face[i].hz = targets[i][2];
       } else {
-        face[i].homeX = null; face[i].homeY = null;
+        face[i].hx = null; face[i].hy = null; face[i].hz = null;
       }
     }
   }
@@ -141,6 +175,13 @@
     seedBg();
     seedFace();
     assignHomes();
+  }
+
+  function project(p, theta) {
+    var cosT = Math.cos(theta), sinT = Math.sin(theta);
+    var xr = p.hx * cosT + p.hz * sinT;
+    var zr = -p.hx * sinT + p.hz * cosT;
+    return { x: faceCX + xr * faceScale, y: faceCY - p.hy * faceScale, zr: zr };
   }
 
   function drawEdges() {
@@ -178,22 +219,28 @@
     }
   }
 
-  function drawFace(f) {
+  function drawFace(f, theta) {
     for (var i = 0; i < face.length; i++) {
       var p = face[i];
-      if (p.homeX === null) continue;
+      if (p.hx === null) continue;
       p.x += p.vx; p.y += p.vy;
       if (p.x < -10) p.x = W + 10; else if (p.x > W + 10) p.x = -10;
       if (p.y < -10) p.y = H + 10; else if (p.y > H + 10) p.y = -10;
 
-      var dx = p.x + (p.homeX - p.x) * f;
-      var dy = p.y + (p.homeY - p.y) * f;
+      var pr = project(p, theta);
+      var dx = p.x + (pr.x - p.x) * f;
+      var dy = p.y + (pr.y - p.y) * f;
 
-      var r = 1.6 + (faceScale * 0.55 - 1.6) * f;
+      var depth = pr.zr / R;
+      var dSize = faceScale * 0.5 * (1 + depth * 0.3);
+      var dAlpha = Math.min(1, Math.max(0.3, 0.4 + (depth + 1) * 0.3));
+      var size = 1.6 + (dSize - 1.6) * f;
+      var alpha = 0.45 + (dAlpha - 0.45) * f;
+
       ctx.fillStyle = p.c;
-      ctx.globalAlpha = f > 0.05 ? Math.min(1, 0.5 + f * 0.5) : 0.45;
+      ctx.globalAlpha = alpha;
       ctx.beginPath();
-      ctx.arc(dx, dy, r, 0, Math.PI * 2);
+      ctx.arc(dx, dy, size, 0, Math.PI * 2);
       ctx.fill();
       ctx.globalAlpha = 1;
     }
@@ -202,9 +249,10 @@
   function frame(now) {
     ctx.clearRect(0, 0, W, H);
     var f = reduceMotion ? 1 : F(now);
+    var theta = reduceMotion ? 0.15 : 0.4 * Math.sin(now / 4200);
     drawEdges();
     drawBg(now);
-    drawFace(f);
+    drawFace(f, theta);
     burst *= 0.97;
     if (burst < 0.01) burst = 0;
     if (!reduceMotion) requestAnimationFrame(frame);
@@ -224,12 +272,13 @@
       if (EMOTIONS.indexOf(e) === -1) return;
       emotion = e;
       var f = reduceMotion ? 1 : F(performance.now());
+      var theta = reduceMotion ? 0.15 : 0.4 * Math.sin(performance.now() / 4200);
       for (var i = 0; i < face.length; i++) {
         var p = face[i];
-        if (p.homeX !== null) {
-          p.x = p.x + (p.homeX - p.x) * f;
-          p.y = p.y + (p.homeY - p.y) * f;
-        }
+        if (p.hx === null) continue;
+        var pr = project(p, theta);
+        p.x = p.x + (pr.x - p.x) * f;
+        p.y = p.y + (pr.y - p.y) * f;
       }
       assignHomes();
       cycleStart = performance.now();

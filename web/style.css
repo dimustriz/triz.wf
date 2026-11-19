@@ -71,16 +71,8 @@ body::after {
   margin: 0 auto; padding: 2rem 1.25rem 3rem;
 }
 
-/* Pixel guide (Dr. Know) */
-.guide { display: flex; justify-content: center; margin-bottom: 1.25rem; }
-#face {
-  width: 88px; height: 88px;
-  image-rendering: pixelated;
-  background: rgba(3, 19, 10, 0.7);
-  border: 1px solid rgba(0, 255, 65, 0.28);
-  border-radius: 16px;
-  box-shadow: 0 0 34px rgba(0, 255, 65, 0.18);
-}
+/* Guide spacer — the oracle assembles from the background here */
+.guide { height: 96px; margin-bottom: 1.25rem; }
 
 /* Glass panel */
 .card {
@@ -231,6 +223,5 @@ textarea::placeholder { color: #4b5563; }
   .mode-grid { grid-template-columns: 1fr; }
   .step-nav { flex-direction: column-reverse; }
   .header-meta { display: none; }
-  #face { width: 72px; height: 72px; }
 }
 

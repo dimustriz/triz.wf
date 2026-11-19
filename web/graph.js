@@ -20,7 +20,7 @@
   var burst = 0;
   var cycleStart = performance.now();
 
-  var ASSEMBLE = 1500, HOLD = 3600, DISPERSE = 1200, WANDER = 2800;
+  var ASSEMBLE = 1500, HOLD = 5000, DISPERSE = 1200, WANDER = 10000;
   var TOTAL = ASSEMBLE + HOLD + DISPERSE + WANDER;
 
   var faceCX = 0, faceCY = 0, faceScale = 3;

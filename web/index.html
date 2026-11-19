@@ -8,33 +8,54 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Sora:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
-    <div class="aurora" aria-hidden="true">
-      <span class="blob blob-1"></span>
-      <span class="blob blob-2"></span>
-      <span class="blob blob-3"></span>
-    </div>
+    <div class="bg-grid" aria-hidden="true"></div>
 
     <header class="site-header">
       <a class="brand" href="/">triz<span>.wf</span></a>
-      <div class="header-meta">
-        <span class="meta-item">AURORA · FLUID MESH</span>
-        <span class="meta-item meta-live"><span class="dot"></span>STANDBY</span>
+      <div class="telemetry" aria-hidden="true">
+        <div class="metric">
+          <span class="metric-label">CONTRADICTION</span>
+          <span class="bars" data-bars="3,5,2,4,5,3,4"></span>
+        </div>
+        <div class="metric">
+          <span class="metric-label">ANALOGS</span>
+          <span class="bars" data-bars="2,4,5,4,3,5,4"></span>
+        </div>
+        <div class="metric">
+          <span class="metric-label">CRITIC</span>
+          <span class="sparkline" id="header-spark"></span>
+        </div>
       </div>
     </header>
 
-    <main id="app" class="app" aria-live="polite"></main>
+    <main class="app" aria-live="polite">
+      <div id="app"></div>
+
+      <details class="reference" open>
+        <summary>40 ИЗОБРЕТАТЕЛЬСКИХ ПРИНЦИПОВ</summary>
+        <div id="principles-grid" class="principles-grid"></div>
+      </details>
+    </main>
+
+    <aside class="rail" aria-hidden="true">
+      <div class="rail-title">CONTRADICTION MATRIX</div>
+      <div class="matrix" id="matrix"></div>
+      <div class="rail-title">SIGNAL</div>
+      <div class="sparkline wide" id="rail-spark"></div>
+    </aside>
 
     <footer class="site-footer">
-      <p>TRIZ · CROSS-DOMAIN PATENT SEARCH · ADVERSARIAL CRITIC</p>
+      <div class="ticker" id="ticker"></div>
     </footer>
 
     <noscript><p class="noscript">Для работы мастера включите JavaScript.</p></noscript>
+    <script src="/dashboard.js"></script>
     <script src="/app.js"></script>
   </body>
 </html>

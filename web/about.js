@@ -25,9 +25,16 @@ var I18N = {
     "about.how.s4": "The system strips the jargon, extracts the conflicting pair and formulates the physical contradiction and the ideal final result.",
     "about.how.s5": "It retrieves cross-domain patent analogs (excluding your own CPC class), critiques the hypotheses and returns a solution.",
     "about.stack.title": "How it is built",
-    "about.stack.simple": "In simple words: the interface runs on Cloudflare’s edge, and the heavy AI model spins up on demand only while you use it — so when nobody is solving, it costs nothing.",
-    "about.stack.detail": "Under the hood: a lightweight shell on Cloudflare Pages; a fine-tuned open model served on Modal (FastAPI + vLLM) that starts in seconds and stops after idle; hybrid retrieval (dense + BM25) over the TRIZ theory archive; cross-domain patent search on Google BigQuery Patents.",
-    "about.stack.why": "Why it’s good: zero idle cost, fast startup, and the forced cross-domain patent search plus the adversarial critic break the psychological inertia that makes a plain AI give the average answer.",
+    "about.stack.web.title": "Web shell",
+    "about.stack.web.desc": "A fast wizard on Cloudflare Pages — leads you through the steps and streams the answer back.",
+    "about.stack.solver.title": "Solver model",
+    "about.stack.solver.desc": "A fine-tuned open model trained on patents and TRIZ theory — sharpens the contradiction, formulates the ideal final result and generates the solution.",
+    "about.stack.skeptic.title": "Skeptic model",
+    "about.stack.skeptic.desc": "A separate model trained on a corpus of critical materials (analyses of mistakes and dead ends) — rejects weak, compromise solutions.",
+    "about.stack.patents.title": "Patent base",
+    "about.stack.patents.desc": "Direct integration with Google BigQuery Patents — cross-domain analog retrieval that excludes your own CPC class.",
+    "about.stack.rag.title": "Theory archive",
+    "about.stack.rag.desc": "Hybrid retrieval (dense embeddings + BM25) over the archive of TRIZ articles and heuristics.",
     "about.status": "Status: the interface is live; the solver backend is being wired up."
   }
   ,
@@ -57,9 +64,16 @@ var I18N = {
     "about.how.s4": "Система очищает от жаргона, выделяет конфликтующую пару и формулирует физическое противоречие и ИКР.",
     "about.how.s5": "Ищет межотраслевые патентные аналоги (исключая ваш класс CPC), критикует гипотезы и возвращает решение.",
     "about.stack.title": "Как устроено",
-    "about.stack.simple": "Простыми словами: интерфейс работает на edge Cloudflare, а тяжёлая ИИ-модель запускается по требованию — только пока вы решаете задачу. Поэтому в простое это ничего не стоит.",
-    "about.stack.detail": "Под капотом: лёгкая оболочка на Cloudflare Pages; дообученная открытая модель на Modal (FastAPI + vLLM), которая стартует за секунды и гасится после простоя; гибридный поиск (dense + BM25) по архиву теории ТРИЗ; межотраслевой патентный поиск в Google BigQuery Patents.",
-    "about.stack.why": "Почему это хорошо: нулевая стоимость простоя, быстрый старт, а принудительный межотраслевой патентный поиск и агент-критик ломают психологическую инерцию, из-за которой обычный ИИ выдаёт средний ответ.",
+    "about.stack.web.title": "Веб-оболочка",
+    "about.stack.web.desc": "Быстрый мастер на Cloudflare Pages — ведёт по шагам и стримит ответ обратно.",
+    "about.stack.solver.title": "Модель-решатель",
+    "about.stack.solver.desc": "Дообученная открытая модель на патентах и теории ТРИЗ — обостряет противоречие, формулирует ИКР и генерирует решение.",
+    "about.stack.skeptic.title": "Модель-скептик",
+    "about.stack.skeptic.desc": "Отдельная модель, обученная на корпусе критических материалов (разборы ошибок и тупиков), — отбраковывает слабые компромиссные решения.",
+    "about.stack.patents.title": "Патентная база",
+    "about.stack.patents.desc": "Прямая интеграция с Google BigQuery Patents — межотраслевой поиск аналогов с исключением вашего класса CPC.",
+    "about.stack.rag.title": "Архив теории",
+    "about.stack.rag.desc": "Гибридный поиск (плотные эмбеддинги + BM25) по архиву статей и эвристик ТРИЗ.",
     "about.status": "Статус: интерфейс работает; бэкенд решателя подключается."
   }
   ,
@@ -89,9 +103,16 @@ var I18N = {
     "about.how.s4": "Система очищає від жаргону, виділяє конфліктуючу пару та формулює фізичне протиріччя й ІКР.",
     "about.how.s5": "Шукає міжгалузеві патентні аналоги (виключаючи ваш клас CPC), критикує гіпотези та повертає рішення.",
     "about.stack.title": "Як влаштовано",
-    "about.stack.simple": "Простими словами: інтерфейс працює на edge Cloudflare, а важка ШІ-модель запускається за вимогою — лише поки ви розв’язуєте задачу. Тому в простій це нічого не коштує.",
-    "about.stack.detail": "Під капотом: легка оболонка на Cloudflare Pages; донавчена відкрита модель на Modal (FastAPI + vLLM), що стартує за секунди й гаситься після простою; гібридний пошук (dense + BM25) за архівом теорії ТРИЗ; міжгалузевий патентний пошук у Google BigQuery Patents.",
-    "about.stack.why": "Чому це добре: нульова вартість простою, швидкий старт, а примусовий міжгалузевий патентний пошук і агент-критик ламають психологічну інерцію, через яку звичайний ШІ видає середню відповідь.",
+    "about.stack.web.title": "Веб-оболонка",
+    "about.stack.web.desc": "Швидкий майстер на Cloudflare Pages — веде за кроками та стримить відповідь назад.",
+    "about.stack.solver.title": "Модель-розв’язувач",
+    "about.stack.solver.desc": "Донавчена відкрита модель на патентах і теорії ТРИЗ — загострює протиріччя, формулює ІКР і генерує рішення.",
+    "about.stack.skeptic.title": "Модель-скептик",
+    "about.stack.skeptic.desc": "Окрема модель, навчена на корпусі критичних матеріалів (розбори помилок і глухих кутів), — відбраковує слабкі компромісні рішення.",
+    "about.stack.patents.title": "Патентна база",
+    "about.stack.patents.desc": "Пряма інтеграція з Google BigQuery Patents — міжгалузевий пошук аналогів із виключенням вашого класу CPC.",
+    "about.stack.rag.title": "Архів теорії",
+    "about.stack.rag.desc": "Гібридний пошук (щільні ембеддинги + BM25) за архівом статей і евристик ТРИЗ.",
     "about.status": "Статус: інтерфейс працює; бекенд розв’язувача підключається."
   }
   ,
@@ -121,9 +142,16 @@ var I18N = {
     "about.how.s4": "Le système nettoie le jargon, extrait la paire en conflit et formule la contradiction physique et le RIF.",
     "about.how.s5": "Il récupère des analogues de brevets inter-domaines (hors votre classe CPC), critique les hypothèses et renvoie une solution.",
     "about.stack.title": "Architecture",
-    "about.stack.simple": "En clair : l’interface tourne sur l’edge de Cloudflare, et le lourd modèle IA ne démarre qu’à la demande — seulement pendant que vous résolvez. Donc quand personne ne résout, cela ne coûte rien.",
-    "about.stack.detail": "Sous le capot : une coque légère sur Cloudflare Pages ; un modèle ouvert affiné servi sur Modal (FastAPI + vLLM) qui démarre en quelques secondes puis s’arrête après inactivité ; une recherche hybride (dense + BM25) sur l’archive de la théorie TRIZ ; une recherche de brevets inter-domaines sur Google BigQuery Patents.",
-    "about.stack.why": "Pourquoi c’est bien : coût d’inactivité nul, démarrage rapide, et la recherche forcée de brevets inter-domaines plus le critique adverse cassent l’inertie psychologique qui fait produire la réponse moyenne à une IA ordinaire.",
+    "about.stack.web.title": "Coque web",
+    "about.stack.web.desc": "Un assistant rapide sur Cloudflare Pages — vous guide par étapes et renvoie la réponse en streaming.",
+    "about.stack.solver.title": "Modèle résolveur",
+    "about.stack.solver.desc": "Un modèle ouvert affiné sur les brevets et la théorie TRIZ — accentue la contradiction, formule le RIF et génère la solution.",
+    "about.stack.skeptic.title": "Modèle sceptique",
+    "about.stack.skeptic.desc": "Un modèle séparé, entraîné sur un corpus de matériaux critiques (analyses d’erreurs et d’impasses) — rejette les solutions faibles de compromis.",
+    "about.stack.patents.title": "Base de brevets",
+    "about.stack.patents.desc": "Intégration directe avec Google BigQuery Patents — recherche d’analogues inter-domaines excluant votre propre classe CPC.",
+    "about.stack.rag.title": "Archive de la théorie",
+    "about.stack.rag.desc": "Recherche hybride (embeddings denses + BM25) sur l’archive d’articles et d’heuristiques TRIZ.",
     "about.status": "Statut : l’interface est en ligne ; le backend du résolveur est en cours de branchement."
   }
 };
@@ -168,9 +196,13 @@ function render() {
         '<li>' + t('about.how.s5') + '</li>' +
       '</ol></section>' +
     '<section><h2>' + t('about.stack.title') + '</h2>' +
-      '<p>' + t('about.stack.simple') + '</p>' +
-      '<p>' + t('about.stack.detail') + '</p>' +
-      '<p class="about-why">' + t('about.stack.why') + '</p></section>' +
+      '<div class="about-stack">' +
+        typeCard('about.stack.web') +
+        typeCard('about.stack.solver') +
+        typeCard('about.stack.skeptic') +
+        typeCard('about.stack.patents') +
+        typeCard('about.stack.rag') +
+      '</div></section>' +
     '<p class="about-status">' + t('about.status') + '</p>';
 }
 

@@ -89,7 +89,7 @@
       var here = location.pathname.replace(/\/+$/, '') || '/';
       nav.innerHTML =
         '<a href="/"' + (here === '/' || here === '/index.html' ? ' class="active"' : '') + '>' + nl.home + '</a>' +
-        '<a href="/about.html"' + (here === '/about.html' ? ' class="active"' : '') + '>' + nl.about + '</a>';
+        '<a href="/about"' + (here === '/about' || here === '/about.html' ? ' class="active"' : '') + '>' + nl.about + '</a>';
     }
   }
 

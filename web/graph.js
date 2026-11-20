@@ -94,26 +94,29 @@
     }
   }
 
-  function genPoints(emotion) {
+  function genPoints(emotion, opts) {
+    opts = opts || {};
     var pts = [];
     var shift = emotion === 'thinking' ? 1.6 : 0;
+    var rx = opts.skeptic ? 8 : R;
+    var ry = opts.skeptic ? 11 : R;
 
-    // skull (dim sphere)
+    // skull (ellipsoid for the skeptic, sphere for the expert)
     for (var i = 0; i < 260; i++) {
       var u = Math.random() * 2 - 1;
       var th = Math.random() * Math.PI * 2;
       var s = Math.sqrt(1 - u * u);
-      pts.push([R * s * Math.cos(th), R * s * Math.sin(th), R * u, 0]);
+      pts.push([rx * s * Math.cos(th), ry * s * Math.sin(th), R * u, 0]);
     }
 
-    // wild hair (top/sides/back)
+    // hair (top/sides/back, follows the head)
     for (var j = 0; j < 340; j++) {
       var uu = Math.random() * 2 - 1;
       var th2 = Math.random() * Math.PI * 2;
       var s2 = Math.sqrt(Math.max(0, 1 - uu * uu));
       var rr = R + 1.2 + Math.random() * 3.3;
-      var y = rr * uu;
-      var x = rr * s2 * Math.cos(th2);
+      var y = rr * uu * (ry / R);
+      var x = rr * s2 * Math.cos(th2) * (rx / R);
       var z = rr * s2 * Math.sin(th2);
       if (y > -R * 0.35 && z < R * 0.4) pts.push([x, y, z, 0]);
     }
@@ -123,9 +126,11 @@
       pts.push([(Math.random() - 0.5) * 2.2, (Math.random() - 0.5) * 2.2, R + 1.5 + Math.random() * 1.2, 1]);
     }
 
-    // mustache (bushy, bright)
-    for (var m = 0; m < 80; m++) {
-      pts.push([(Math.random() * 2 - 1) * 5.2, -3 + (Math.random() - 0.5) * 1.6, R + 0.6 + Math.random() * 0.9, 1]);
+    // mustache (bushy, bright) — expert only
+    if (!opts.skeptic) {
+      for (var m = 0; m < 80; m++) {
+        pts.push([(Math.random() * 2 - 1) * 5.2, -3 + (Math.random() - 0.5) * 1.6, R + 0.6 + Math.random() * 0.9, 1]);
+      }
     }
 
     addEyes(pts, emotion, R, shift);
@@ -141,7 +146,8 @@
     return { x: cx + xr * scale, y: cy - p.hy * scale, zr: zr };
   }
 
-  function makeFace() {
+  function makeFace(opts) {
+    opts = opts || {};
     var f = {
       parts: [],
       emotion: 'idle',
@@ -159,7 +165,7 @@
       }
     };
     f.assignHomes = function () {
-      var targets = genPoints(f.emotion);
+      var targets = genPoints(f.emotion, opts);
       for (var i = 0; i < f.parts.length; i++) {
         if (i < targets.length) {
           f.parts[i].hx = targets[i][0];
@@ -278,7 +284,7 @@
   }
 
   var expert = makeFace();
-  var skeptic = makeFace();
+  var skeptic = makeFace({ skeptic: true });
 
   function resize() {
     W = window.innerWidth; H = window.innerHeight;

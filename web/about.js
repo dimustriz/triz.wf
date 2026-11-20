@@ -35,7 +35,14 @@ var I18N = {
     "about.stack.patents.desc": "Direct integration with Google BigQuery Patents — cross-domain analog retrieval that excludes your own CPC class.",
     "about.stack.rag.title": "Theory archive",
     "about.stack.rag.desc": "Hybrid retrieval (dense embeddings + BM25) over the archive of TRIZ articles and heuristics.",
-    "about.status": "Status: the interface is live; the solver backend is being wired up."
+    "about.status": "Status: the interface is live; the solver backend is being wired up.",
+    "about.train.title": "How the models are trained",
+    "about.train.base.title": "Base model",
+    "about.train.base.desc": "An open 7B–14B model from the Qwen or Llama family.",
+    "about.train.method.title": "Fine-tuning",
+    "about.train.method.desc": "QLoRA (SFT first, then DPO) with PyTorch + Unsloth + Hugging Face TRL, on rented RTX 4090s (RunPod / Vast.ai). We train compact LoRA adapters, not full weights.",
+    "about.train.update.title": "Updates",
+    "about.train.update.desc": "When a stronger base model is released, we re-run the same dataset and adapter on it and swap the adapter — cheap and fast, no full retraining."
   }
   ,
   ru: {
@@ -74,7 +81,14 @@ var I18N = {
     "about.stack.patents.desc": "Прямая интеграция с Google BigQuery Patents — межотраслевой поиск аналогов с исключением вашего класса CPC.",
     "about.stack.rag.title": "Архив теории",
     "about.stack.rag.desc": "Гибридный поиск (плотные эмбеддинги + BM25) по архиву статей и эвристик ТРИЗ.",
-    "about.status": "Статус: интерфейс работает; бэкенд решателя подключается."
+    "about.status": "Статус: интерфейс работает; бэкенд решателя подключается.",
+    "about.train.title": "Как обучаются модели",
+    "about.train.base.title": "Базовая модель",
+    "about.train.base.desc": "Открытая модель 7B–14B параметров — семейства Qwen или Llama.",
+    "about.train.method.title": "Дообучение",
+    "about.train.method.desc": "QLoRA (сначала SFT, затем DPO) на PyTorch + Unsloth + Hugging Face TRL, на арендованных RTX 4090 (RunPod / Vast.ai). Обучаем компактные LoRA-адаптеры, а не полные веса.",
+    "about.train.update.title": "Обновление",
+    "about.train.update.desc": "Когда выходит более сильная базовая модель, мы заново прогоняем тот же датасет и адаптер на ней и меняем адаптер — дёшево и быстро, без полного переобучения."
   }
   ,
   uk: {
@@ -113,7 +127,14 @@ var I18N = {
     "about.stack.patents.desc": "Пряма інтеграція з Google BigQuery Patents — міжгалузевий пошук аналогів із виключенням вашого класу CPC.",
     "about.stack.rag.title": "Архів теорії",
     "about.stack.rag.desc": "Гібридний пошук (щільні ембеддинги + BM25) за архівом статей і евристик ТРИЗ.",
-    "about.status": "Статус: інтерфейс працює; бекенд розв’язувача підключається."
+    "about.status": "Статус: інтерфейс працює; бекенд розв’язувача підключається.",
+    "about.train.title": "Як навчаються моделі",
+    "about.train.base.title": "Базова модель",
+    "about.train.base.desc": "Відкрита модель 7B–14B параметрів — родини Qwen або Llama.",
+    "about.train.method.title": "Донавчання",
+    "about.train.method.desc": "QLoRA (спочатку SFT, потім DPO) на PyTorch + Unsloth + Hugging Face TRL, на орендованих RTX 4090 (RunPod / Vast.ai). Навчаємо компактні LoRA-адаптери, а не повні ваги.",
+    "about.train.update.title": "Оновлення",
+    "about.train.update.desc": "Коли виходить сильніша базова модель, ми заново проганяємо той самий датасет і адаптер на ній і міняємо адаптер — дешево і швидко, без повного перенавчання."
   }
   ,
   fr: {
@@ -152,7 +173,14 @@ var I18N = {
     "about.stack.patents.desc": "Intégration directe avec Google BigQuery Patents — recherche d’analogues inter-domaines excluant votre propre classe CPC.",
     "about.stack.rag.title": "Archive de la théorie",
     "about.stack.rag.desc": "Recherche hybride (embeddings denses + BM25) sur l’archive d’articles et d’heuristiques TRIZ.",
-    "about.status": "Statut : l’interface est en ligne ; le backend du résolveur est en cours de branchement."
+    "about.status": "Statut : l’interface est en ligne ; le backend du résolveur est en cours de branchement.",
+    "about.train.title": "Comment les modèles sont entraînés",
+    "about.train.base.title": "Modèle de base",
+    "about.train.base.desc": "Un modèle ouvert de 7B–14B paramètres de la famille Qwen ou Llama.",
+    "about.train.method.title": "Fine-tuning",
+    "about.train.method.desc": "QLoRA (SFT d’abord, puis DPO) avec PyTorch + Unsloth + Hugging Face TRL, sur des RTX 4090 louées (RunPod / Vast.ai). Nous entraînons des adaptateurs LoRA compacts, pas les poids complets.",
+    "about.train.update.title": "Mises à jour",
+    "about.train.update.desc": "Quand un modèle de base plus fort sort, nous ré-exécutons le même jeu de données et l’adaptateur dessus et remplaçons l’adaptateur — rapide et bon marché, sans réentraînement complet."
   }
 };
 var LANG = 'ru';
@@ -202,6 +230,12 @@ function render() {
         typeCard('about.stack.skeptic') +
         typeCard('about.stack.patents') +
         typeCard('about.stack.rag') +
+      '</div></section>' +
+    '<section><h2>' + t('about.train.title') + '</h2>' +
+      '<div class="about-train">' +
+        typeCard('about.train.base') +
+        typeCard('about.train.method') +
+        typeCard('about.train.update') +
       '</div></section>' +
     '<p class="about-status">' + t('about.status') + '</p>';
 }

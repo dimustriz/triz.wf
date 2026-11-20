@@ -14,6 +14,12 @@
     { id: 'uk', label: 'Українська' },
     { id: 'fr', label: 'Français' },
   ];
+  var NAV = {
+    en: { home: 'Solver', about: 'About' },
+    ru: { home: 'Решатель', about: 'О проекте' },
+    uk: { home: 'Розв’язувач', about: 'Про проєкт' },
+    fr: { home: 'Solveur', about: 'À propos' },
+  };
 
   function store(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
   function read(k, d) { try { return localStorage.getItem(k) || d; } catch (e) { return d; } }
@@ -76,6 +82,15 @@
         build();
       });
     });
+
+    var nav = document.getElementById('site-nav');
+    if (nav) {
+      var nl = NAV[lang] || NAV.en;
+      var here = location.pathname.replace(/\/+$/, '') || '/';
+      nav.innerHTML =
+        '<a href="/"' + (here === '/' || here === '/index.html' ? ' class="active"' : '') + '>' + nl.home + '</a>' +
+        '<a href="/about.html"' + (here === '/about.html' ? ' class="active"' : '') + '>' + nl.about + '</a>';
+    }
   }
 
   document.addEventListener('click', function (e) {

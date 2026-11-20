@@ -13,12 +13,18 @@
     { id: 'ru', label: 'Русский' },
     { id: 'uk', label: 'Українська' },
     { id: 'fr', label: 'Français' },
+    { id: 'de', label: 'Deutsch' },
+    { id: 'es', label: 'Español' },
+    { id: 'it', label: 'Italiano' },
   ];
   var NAV = {
     en: { home: 'Solver', about: 'About' },
     ru: { home: 'Решатель', about: 'О проекте' },
     uk: { home: 'Розв’язувач', about: 'Про проєкт' },
     fr: { home: 'Solveur', about: 'À propos' },
+    de: { home: 'Löser', about: 'Über' },
+    es: { home: 'Solucionador', about: 'Acerca de' },
+    it: { home: 'Risolutore', about: 'Informazioni' },
   };
 
   function store(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }

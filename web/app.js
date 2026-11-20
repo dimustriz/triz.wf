@@ -1,7 +1,7 @@
 var I18N = {
   en: {
     "steps.mode.title": "Mode",
-    "steps.mode.subtitle": "Which contradiction class to solve",
+    "steps.mode.subtitle": "Choose the type of task",
     "steps.problem.title": "Problem",
     "steps.problem.subtitle": "Describe the problem in your own words",
     "steps.context.title": "Context",
@@ -10,10 +10,16 @@ var I18N = {
     "steps.review.subtitle": "Confirm and run the analysis",
     "steps.result.title": "Analysis",
     "steps.result.subtitle": "TRIZ analysis result",
-    "mode.engineering": "Engineering",
-    "mode.engineeringDesc": "Hardware / DeepTech — physical effects and patent base.",
-    "mode.business": "Business & product",
-    "mode.businessDesc": "System contradictions in monetization, distribution, UX.",
+    "mode.engineering": "Engineering & hardware",
+    "mode.engineeringDesc": "Mechanics, materials, electronics, DeepTech — physical and technical contradictions.",
+    "mode.product": "Product & UX",
+    "mode.productDesc": "Improve a feature or the experience without trading off simplicity, cost or speed.",
+    "mode.business": "Business & strategy",
+    "mode.businessDesc": "Monetization, distribution, growth — system contradictions in the business model.",
+    "mode.science": "Science & R&D",
+    "mode.scienceDesc": "Research problems and abstract system contradictions.",
+    "mode.universal": "Universal",
+    "mode.universalDesc": "Any task where a contradiction blocks you — the generic TRIZ path.",
     "problem.label": "Problem statement",
     "problem.placeholder": "e.g. “We want a thinner case, but it loses strength”…",
     "problem.hint": "Do not worry about wording — the system will strip the jargon.",
@@ -42,7 +48,7 @@ var I18N = {
   },
   ru: {
     "steps.mode.title": "Режим",
-    "steps.mode.subtitle": "Какой класс противоречия решаем",
+    "steps.mode.subtitle": "Выберите тип задачи",
     "steps.problem.title": "Задача",
     "steps.problem.subtitle": "Опишите проблему своими словами",
     "steps.context.title": "Контекст",
@@ -51,10 +57,16 @@ var I18N = {
     "steps.review.subtitle": "Подтвердите и запустите разбор",
     "steps.result.title": "Разбор",
     "steps.result.subtitle": "Результат TRIZ-анализа",
-    "mode.engineering": "Инженерный",
-    "mode.engineeringDesc": "Hardware / DeepTech — физические эффекты и патентная база.",
-    "mode.business": "Бизнес и продукт",
-    "mode.businessDesc": "Системные противоречия в монетизации, дистрибуции, UX.",
+    "mode.engineering": "Инженерия и железо",
+    "mode.engineeringDesc": "Механика, материалы, электроника, DeepTech — физические и технические противоречия.",
+    "mode.product": "Продукт и UX",
+    "mode.productDesc": "Улучшить функцию или опыт без потери простоты, цены или скорости.",
+    "mode.business": "Бизнес и стратегия",
+    "mode.businessDesc": "Монетизация, дистрибуция, рост — системные противоречия в бизнес-модели.",
+    "mode.science": "Наука и R&D",
+    "mode.scienceDesc": "Исследовательские задачи и абстрактные системные противоречия.",
+    "mode.universal": "Универсальный",
+    "mode.universalDesc": "Любая задача, где мешает противоречие — универсальный путь ТРИЗ.",
     "problem.label": "Формулировка проблемы",
     "problem.placeholder": "Например: «Хотим корпус тоньше, но он теряет прочность»…",
     "problem.hint": "Не думайте о формулировке — система сама очистит её от жаргона.",
@@ -84,7 +96,7 @@ var I18N = {
   ,
   uk: {
     "steps.mode.title": "Режим",
-    "steps.mode.subtitle": "Який клас протиріччя розв'язуємо",
+    "steps.mode.subtitle": "Оберіть тип задачі",
     "steps.problem.title": "Задача",
     "steps.problem.subtitle": "Опишіть проблему своїми словами",
     "steps.context.title": "Контекст",
@@ -93,10 +105,16 @@ var I18N = {
     "steps.review.subtitle": "Підтвердіть і запустіть розбір",
     "steps.result.title": "Розбір",
     "steps.result.subtitle": "Результат TRIZ-аналізу",
-    "mode.engineering": "Інженерний",
-    "mode.engineeringDesc": "Hardware / DeepTech — фізичні ефекти і патентна база.",
-    "mode.business": "Бізнес і продукт",
-    "mode.businessDesc": "Системні протиріччя в монетизації, дистрибуції, UX.",
+    "mode.engineering": "Інженерія та залізо",
+    "mode.engineeringDesc": "Механіка, матеріали, електроніка, DeepTech — фізичні й технічні протиріччя.",
+    "mode.product": "Продукт і UX",
+    "mode.productDesc": "Покращити функцію чи досвід без втрати простоти, ціни або швидкості.",
+    "mode.business": "Бізнес і стратегія",
+    "mode.businessDesc": "Монетизація, дистрибуція, зростання — системні протиріччя в бізнес-моделі.",
+    "mode.science": "Наука та R&D",
+    "mode.scienceDesc": "Дослідницькі задачі та абстрактні системні протиріччя.",
+    "mode.universal": "Універсальний",
+    "mode.universalDesc": "Будь-яка задача, де заважає протиріччя — універсальний шлях ТРИЗ.",
     "problem.label": "Формулювання проблеми",
     "problem.placeholder": "Наприклад: «Хочемо корпус тонший, але він втрачає міцність»…",
     "problem.hint": "Не думайте про формулювання — система сама очистить його від жаргону.",
@@ -125,7 +143,7 @@ var I18N = {
   },
   fr: {
     "steps.mode.title": "Mode",
-    "steps.mode.subtitle": "Quelle classe de contradiction",
+    "steps.mode.subtitle": "Choisissez le type de tâche",
     "steps.problem.title": "Problème",
     "steps.problem.subtitle": "Décrivez le problème avec vos mots",
     "steps.context.title": "Contexte",
@@ -134,10 +152,16 @@ var I18N = {
     "steps.review.subtitle": "Confirmez et lancez l'analyse",
     "steps.result.title": "Analyse",
     "steps.result.subtitle": "Résultat de l'analyse TRIZ",
-    "mode.engineering": "Ingénierie",
-    "mode.engineeringDesc": "Hardware / DeepTech — effets physiques et brevets.",
-    "mode.business": "Business & produit",
-    "mode.businessDesc": "Contradictions système en monétisation, distribution, UX.",
+    "mode.engineering": "Ingénierie & hardware",
+    "mode.engineeringDesc": "Mécanique, matériaux, électronique, DeepTech — contradictions physiques et techniques.",
+    "mode.product": "Produit & UX",
+    "mode.productDesc": "Améliorer une fonction ou l'expérience sans sacrifier la simplicité, le coût ou la vitesse.",
+    "mode.business": "Business & stratégie",
+    "mode.businessDesc": "Monétisation, distribution, croissance — contradictions système du modèle économique.",
+    "mode.science": "Science & R&D",
+    "mode.scienceDesc": "Problèmes de recherche et contradictions système abstraites.",
+    "mode.universal": "Universel",
+    "mode.universalDesc": "Toute tâche où une contradiction vous bloque — le chemin TRIZ générique.",
     "problem.label": "Énoncé du problème",
     "problem.placeholder": "Ex. : « Un boîtier plus fin, mais il perd en solidité »…",
     "problem.hint": "Ne vous souciez pas de la formulation — le système nettoiera le jargon.",
@@ -166,7 +190,7 @@ var I18N = {
   },
   de: {
     "steps.mode.title": "Modus",
-    "steps.mode.subtitle": "Welche Widerspruchsklasse lösen wir",
+    "steps.mode.subtitle": "Wähle den Aufgabentyp",
     "steps.problem.title": "Problem",
     "steps.problem.subtitle": "Beschreibe das Problem in deinen eigenen Worten",
     "steps.context.title": "Kontext",
@@ -175,10 +199,16 @@ var I18N = {
     "steps.review.subtitle": "Bestätigen und Analyse starten",
     "steps.result.title": "Analyse",
     "steps.result.subtitle": "Ergebnis der TRIZ-Analyse",
-    "mode.engineering": "Ingenieurwesen",
-    "mode.engineeringDesc": "Hardware / DeepTech — physikalische Effekte und Patentbasis.",
-    "mode.business": "Business & Produkt",
-    "mode.businessDesc": "Systemwidersprüche bei Monetarisierung, Vertrieb, UX.",
+    "mode.engineering": "Ingenieurwesen & Hardware",
+    "mode.engineeringDesc": "Mechanik, Materialien, Elektronik, DeepTech — physikalische und technische Widersprüche.",
+    "mode.product": "Produkt & UX",
+    "mode.productDesc": "Eine Funktion oder das Erlebnis verbessern, ohne Einfachheit, Kosten oder Tempo zu opfern.",
+    "mode.business": "Business & Strategie",
+    "mode.businessDesc": "Monetarisierung, Vertrieb, Wachstum — Systemwidersprüche im Geschäftsmodell.",
+    "mode.science": "Wissenschaft & R&D",
+    "mode.scienceDesc": "Forschungsprobleme und abstrakte Systemwidersprüche.",
+    "mode.universal": "Universell",
+    "mode.universalDesc": "Jede Aufgabe, bei der ein Widerspruch blockiert — der generische TRIZ-Weg.",
     "problem.label": "Problemstellung",
     "problem.placeholder": "z. B. „Wir wollen ein dünneres Gehäuse, aber es verliert an Festigkeit“…",
     "problem.hint": "Mach dir keine Gedanken um die Formulierung — das System entfernt den Jargon.",
@@ -208,7 +238,7 @@ var I18N = {
   ,
   es: {
     "steps.mode.title": "Modo",
-    "steps.mode.subtitle": "Qué clase de contradicción resolver",
+    "steps.mode.subtitle": "Elige el tipo de tarea",
     "steps.problem.title": "Problema",
     "steps.problem.subtitle": "Describe el problema con tus propias palabras",
     "steps.context.title": "Contexto",
@@ -217,10 +247,16 @@ var I18N = {
     "steps.review.subtitle": "Confirma y lanza el análisis",
     "steps.result.title": "Análisis",
     "steps.result.subtitle": "Resultado del análisis TRIZ",
-    "mode.engineering": "Ingeniería",
-    "mode.engineeringDesc": "Hardware / DeepTech — efectos físicos y base de patentes.",
-    "mode.business": "Negocio y producto",
-    "mode.businessDesc": "Contradicciones de sistema en monetización, distribución, UX.",
+    "mode.engineering": "Ingeniería y hardware",
+    "mode.engineeringDesc": "Mecánica, materiales, electrónica, DeepTech — contradicciones físicas y técnicas.",
+    "mode.product": "Producto y UX",
+    "mode.productDesc": "Mejorar una función o la experiencia sin sacrificar simplicidad, coste o velocidad.",
+    "mode.business": "Negocio y estrategia",
+    "mode.businessDesc": "Monetización, distribución, crecimiento — contradicciones de sistema en el modelo de negocio.",
+    "mode.science": "Ciencia e I+D",
+    "mode.scienceDesc": "Problemas de investigación y contradicciones de sistema abstractas.",
+    "mode.universal": "Universal",
+    "mode.universalDesc": "Cualquier tarea donde una contradicción te bloquea — la vía TRIZ genérica.",
     "problem.label": "Planteamiento del problema",
     "problem.placeholder": "p. ej. «Queremos una carcasa más fina, pero pierde resistencia»…",
     "problem.hint": "No te preocupes por la redacción — el sistema limpiará la jerga.",
@@ -250,7 +286,7 @@ var I18N = {
   ,
   it: {
     "steps.mode.title": "Modalità",
-    "steps.mode.subtitle": "Quale classe di contraddizione risolvere",
+    "steps.mode.subtitle": "Scegli il tipo di attività",
     "steps.problem.title": "Problema",
     "steps.problem.subtitle": "Descrivi il problema con parole tue",
     "steps.context.title": "Contesto",
@@ -259,10 +295,16 @@ var I18N = {
     "steps.review.subtitle": "Conferma e avvia l'analisi",
     "steps.result.title": "Analisi",
     "steps.result.subtitle": "Risultato dell'analisi TRIZ",
-    "mode.engineering": "Ingegneria",
-    "mode.engineeringDesc": "Hardware / DeepTech — effetti fisici e base brevettuale.",
-    "mode.business": "Business e prodotto",
-    "mode.businessDesc": "Contraddizioni di sistema in monetizzazione, distribuzione, UX.",
+    "mode.engineering": "Ingegneria e hardware",
+    "mode.engineeringDesc": "Meccanica, materiali, elettronica, DeepTech — contraddizioni fisiche e tecniche.",
+    "mode.product": "Prodotto e UX",
+    "mode.productDesc": "Migliorare una funzione o l'esperienza senza sacrificare semplicità, costi o velocità.",
+    "mode.business": "Business e strategia",
+    "mode.businessDesc": "Monetizzazione, distribuzione, crescita — contraddizioni di sistema nel modello di business.",
+    "mode.science": "Scienza e R&D",
+    "mode.scienceDesc": "Problemi di ricerca e contraddizioni di sistema astratte.",
+    "mode.universal": "Universale",
+    "mode.universalDesc": "Qualsiasi attività in cui una contraddizione ti blocca — il percorso TRIZ generico.",
     "problem.label": "Descrizione del problema",
     "problem.placeholder": "es. «Vogliamo un involucro più sottile, ma perde resistenza»…",
     "problem.hint": "Non preoccuparti della formulazione — il sistema toglierà il gergo.",
@@ -310,7 +352,7 @@ function esc(s) {
   });
 }
 
-function modeLabel(m) { return m === 'engineering' ? t('mode.engineering') : t('mode.business'); }
+function modeLabel(m) { return t('mode.' + m) || m; }
 function pad(n) { return String(n).padStart(2, '0'); }
 
 function render() {
@@ -335,17 +377,16 @@ function render() {
   bind();
 }
 
+var MODES = ['engineering', 'product', 'business', 'science', 'universal'];
+
 function renderMode() {
-  var eng = state.mode === 'engineering' ? 'checked' : '';
-  var biz = state.mode === 'business' ? 'checked' : '';
-  return '<div class="mode-grid">' +
-    '<label class="mode-card"><input type="radio" name="mode" value="engineering" ' + eng + ' />' +
-      '<span class="mode-title">' + t('mode.engineering') + '</span>' +
-      '<p class="mode-desc">' + t('mode.engineeringDesc') + '</p></label>' +
-    '<label class="mode-card"><input type="radio" name="mode" value="business" ' + biz + ' />' +
-      '<span class="mode-title">' + t('mode.business') + '</span>' +
-      '<p class="mode-desc">' + t('mode.businessDesc') + '</p></label>' +
-  '</div>';
+  var cards = MODES.map(function (m) {
+    var checked = state.mode === m ? 'checked' : '';
+    return '<label class="mode-card"><input type="radio" name="mode" value="' + m + '" ' + checked + ' />' +
+      '<span class="mode-title">' + t('mode.' + m) + '</span>' +
+      '<p class="mode-desc">' + t('mode.' + m + 'Desc') + '</p></label>';
+  }).join('');
+  return '<div class="mode-grid">' + cards + '</div>';
 }
 
 function renderProblem() {
@@ -426,7 +467,7 @@ function onAction(action) {
     render();
     return;
   }
-  if (action === 'back') { state.step = Math.max(0, state.step - 1); if (window.TrizFace) window.TrizFace.set('idle'); render(); return; }
+  if (action === 'back') { state.step = Math.max(0, state.step - 1); if (window.TrizFace) window.TrizFace.set('idle'); if (window.TrizSkeptic) window.TrizSkeptic.set('skeptic'); render(); return; }
   if (action === 'next') {
     if (state.step === 1 && !state.problem.trim()) return;
     if (state.step === 3) return submit();

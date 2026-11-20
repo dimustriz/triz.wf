@@ -456,6 +456,7 @@ async function submit() {
     state.result = data;
     state.status = 'done';
     if (window.TrizFace) window.TrizFace.set(res.ok && data && data.ok ? 'happy' : 'sad');
+    if (window.TrizSkeptic) window.TrizSkeptic.set('skeptic');
   } catch (err) {
     state.error = err.message;
     state.status = 'error';

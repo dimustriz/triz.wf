@@ -40,40 +40,41 @@
     return 0;
   }
 
-  function blob(pts, cx, cy, spread, n, z) {
+  function blob(pts, cx, cy, spread, n, z, k) {
+    k = k || 0;
     for (var i = 0; i < n; i++) {
-      pts.push([cx + (Math.random() - 0.5) * spread, cy + (Math.random() - 0.5) * spread, z]);
+      pts.push([cx + (Math.random() - 0.5) * spread, cy + (Math.random() - 0.5) * spread, z, k]);
     }
   }
 
   function addEyes(pts, emotion, R, shift) {
     var y = 2;
     if (emotion === 'happy') {
-      for (var x = -4.5; x <= -2.5; x++) { pts.push([x + shift, y, R]); pts.push([x + shift, y - 0.5, R]); }
-      for (var x2 = 2.5; x2 <= 4.5; x2++) { pts.push([x2 + shift, y, R]); pts.push([x2 + shift, y - 0.5, R]); }
+      for (var x = -4.5; x <= -2.5; x++) { pts.push([x + shift, y, R, 1]); pts.push([x + shift, y - 0.5, R, 1]); }
+      for (var x2 = 2.5; x2 <= 4.5; x2++) { pts.push([x2 + shift, y, R, 1]); pts.push([x2 + shift, y - 0.5, R, 1]); }
     } else if (emotion === 'surprised') {
-      blob(pts, -3.5 + shift, y, 2.4, 18, R);
-      blob(pts, 3.5 + shift, y, 2.4, 18, R);
+      blob(pts, -3.5 + shift, y, 2.4, 18, R, 1);
+      blob(pts, 3.5 + shift, y, 2.4, 18, R, 1);
     } else if (emotion === 'sad') {
-      blob(pts, -3.5 + shift, y, 1.4, 12, R);
-      blob(pts, 3.5 + shift, y, 1.4, 12, R);
-      for (var d = 0; d < 3; d++) { pts.push([-4.5 + shift, y - 1 - d * 0.5, R]); pts.push([4.5 + shift, y - 1 - d * 0.5, R]); }
+      blob(pts, -3.5 + shift, y, 1.4, 12, R, 1);
+      blob(pts, 3.5 + shift, y, 1.4, 12, R, 1);
+      for (var d = 0; d < 3; d++) { pts.push([-4.5 + shift, y - 1 - d * 0.5, R, 1]); pts.push([4.5 + shift, y - 1 - d * 0.5, R, 1]); }
     } else {
-      blob(pts, -3.5 + shift, y, 1.5, 12, R);
-      blob(pts, 3.5 + shift, y, 1.5, 12, R);
+      blob(pts, -3.5 + shift, y, 1.5, 12, R, 1);
+      blob(pts, 3.5 + shift, y, 1.5, 12, R, 1);
     }
   }
 
   function addMouth(pts, emotion, R) {
     var y = -5.5;
     if (emotion === 'happy') {
-      for (var x = -3; x <= 3; x++) { pts.push([x, y + (x * x) * 0.18, R]); pts.push([x, y + (x * x) * 0.18 - 0.5, R]); }
+      for (var x = -3; x <= 3; x++) { pts.push([x, y + (x * x) * 0.18, R, 1]); pts.push([x, y + (x * x) * 0.18 - 0.5, R, 1]); }
     } else if (emotion === 'sad') {
-      for (var x = -3; x <= 3; x++) { pts.push([x, y - (x * x) * 0.18, R]); pts.push([x, y - (x * x) * 0.18 - 0.5, R]); }
+      for (var x = -3; x <= 3; x++) { pts.push([x, y - (x * x) * 0.18, R, 1]); pts.push([x, y - (x * x) * 0.18 - 0.5, R, 1]); }
     } else if (emotion === 'surprised') {
-      blob(pts, 0, y, 1.6, 14, R);
+      blob(pts, 0, y, 1.6, 14, R, 1);
     } else {
-      for (var x2 = -2; x2 <= 2; x2++) { pts.push([x2, y, R]); pts.push([x2, y - 0.5, R]); }
+      for (var x2 = -2; x2 <= 2; x2++) { pts.push([x2, y, R, 1]); pts.push([x2, y - 0.5, R, 1]); }
     }
   }
 
@@ -81,16 +82,16 @@
     var pts = [];
     var shift = emotion === 'thinking' ? 1.6 : 0;
 
-    // skull (dense sphere)
-    for (var i = 0; i < 600; i++) {
+    // skull (dim sphere)
+    for (var i = 0; i < 260; i++) {
       var u = Math.random() * 2 - 1;
       var th = Math.random() * Math.PI * 2;
       var s = Math.sqrt(1 - u * u);
-      pts.push([R * s * Math.cos(th), R * s * Math.sin(th), R * u]);
+      pts.push([R * s * Math.cos(th), R * s * Math.sin(th), R * u, 0]);
     }
 
     // wild hair (top/sides/back)
-    for (var j = 0; j < 600; j++) {
+    for (var j = 0; j < 340; j++) {
       var uu = Math.random() * 2 - 1;
       var th2 = Math.random() * Math.PI * 2;
       var s2 = Math.sqrt(Math.max(0, 1 - uu * uu));
@@ -98,17 +99,17 @@
       var y = rr * uu;
       var x = rr * s2 * Math.cos(th2);
       var z = rr * s2 * Math.sin(th2);
-      if (y > -R * 0.35 && z < R * 0.4) pts.push([x, y, z]);
+      if (y > -R * 0.35 && z < R * 0.4) pts.push([x, y, z, 0]);
     }
 
-    // nose (protruding)
+    // nose (protruding, bright)
     for (var k = 0; k < 24; k++) {
-      pts.push([(Math.random() - 0.5) * 2.2, (Math.random() - 0.5) * 2.2, R + 1.5 + Math.random() * 1.2]);
+      pts.push([(Math.random() - 0.5) * 2.2, (Math.random() - 0.5) * 2.2, R + 1.5 + Math.random() * 1.2, 1]);
     }
 
-    // mustache (bushy)
+    // mustache (bushy, bright)
     for (var m = 0; m < 80; m++) {
-      pts.push([(Math.random() * 2 - 1) * 5.2, -3 + (Math.random() - 0.5) * 1.6, R + 0.6 + Math.random() * 0.9]);
+      pts.push([(Math.random() * 2 - 1) * 5.2, -3 + (Math.random() - 0.5) * 1.6, R + 0.6 + Math.random() * 0.9, 1]);
     }
 
     addEyes(pts, emotion, R, shift);
@@ -136,7 +137,7 @@
       face.push({
         x: Math.random() * W, y: Math.random() * H,
         vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
-        hx: null, hy: null, hz: null,
+        hx: null, hy: null, hz: null, kind: 0,
       });
     }
   }
@@ -148,8 +149,9 @@
         face[i].hx = targets[i][0];
         face[i].hy = targets[i][1];
         face[i].hz = targets[i][2];
+        face[i].kind = targets[i][3] || 0;
       } else {
-        face[i].hx = null; face[i].hy = null; face[i].hz = null;
+        face[i].hx = null; face[i].hy = null; face[i].hz = null; face[i].kind = 0;
       }
     }
   }
@@ -234,8 +236,11 @@
       var dy = p.y + (pr.y - p.y) * f;
 
       var depth = pr.zr / R;
-      var dSize = faceScale * 0.62 * (1 + depth * 0.2);
-      var dAlpha = Math.min(1, Math.max(0.4, 0.55 + (depth + 1) * 0.22));
+      var isFeature = p.kind === 1;
+      var dSize = (isFeature ? faceScale * 0.62 : faceScale * 0.42) * (1 + depth * 0.2);
+      var dAlpha = isFeature
+        ? Math.min(1, 0.85 + (depth + 1) * 0.08)
+        : Math.min(0.6, 0.28 + (depth + 1) * 0.16);
       var size = 1.6 + (dSize - 1.6) * f;
       var alpha = 0.45 + (dAlpha - 0.45) * f;
 

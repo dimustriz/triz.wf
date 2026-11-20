@@ -467,7 +467,7 @@ function onAction(action) {
     render();
     return;
   }
-  if (action === 'back') { state.step = Math.max(0, state.step - 1); if (window.TrizFace) window.TrizFace.set('idle'); if (window.TrizSkeptic) window.TrizSkeptic.set('skeptic'); render(); return; }
+  if (action === 'back') { state.step = Math.max(0, state.step - 1); if (window.TrizFace) window.TrizFace.hide(); if (window.TrizSkeptic) window.TrizSkeptic.set('skeptic'); render(); return; }
   if (action === 'next') {
     if (state.step === 1 && !state.problem.trim()) return;
     if (state.step === 3) return submit();

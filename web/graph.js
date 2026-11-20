@@ -109,16 +109,55 @@
       pts.push([rx * s * Math.cos(th), ry * s * Math.sin(th), R * u, 0]);
     }
 
-    // hair (top/sides/back, follows the head)
-    for (var j = 0; j < 340; j++) {
-      var uu = Math.random() * 2 - 1;
-      var th2 = Math.random() * Math.PI * 2;
-      var s2 = Math.sqrt(Math.max(0, 1 - uu * uu));
-      var rr = R + 1.2 + Math.random() * 3.3;
-      var y = rr * uu * (ry / R);
-      var x = rr * s2 * Math.cos(th2) * (rx / R);
-      var z = rr * s2 * Math.sin(th2);
-      if (y > -R * 0.35 && z < R * 0.4) pts.push([x, y, z, 0]);
+    // hair
+    if (opts.skeptic) {
+      // disheveled spikes: chaotic strands jutting out from the top of the head
+      for (var j = 0; j < 150; j++) {
+        var uu = Math.random() * 2 - 1;
+        var th2 = Math.random() * Math.PI * 2;
+        var s2 = Math.sqrt(Math.max(0, 1 - uu * uu));
+        var bx = rx * s2 * Math.cos(th2);
+        var by = ry * uu;
+        var bz = R * s2 * Math.sin(th2);
+        if (by < -R * 0.25) continue;
+        var dx = (Math.random() - 0.5) * 2.2;
+        var dy = 0.4 + Math.random() * 1.4;
+        var dz = (Math.random() - 0.5) * 2.2;
+        var len = 1.5 + Math.random() * 4.2;
+        for (var q = 0; q < 4; q++) {
+          var tt = q / 3;
+          pts.push([bx + dx * len * tt, by + dy * len * tt, bz + dz * len * tt, 0]);
+        }
+      }
+      // a few stray long spikes
+      for (var j2 = 0; j2 < 36; j2++) {
+        var uu2 = Math.random() * 0.9;
+        var th3 = Math.random() * Math.PI * 2;
+        var s3 = Math.sqrt(Math.max(0, 1 - uu2 * uu2));
+        var bx2 = rx * s3 * Math.cos(th3);
+        var by2 = ry * uu2;
+        var bz2 = R * s3 * Math.sin(th3);
+        var dx2 = (Math.random() - 0.5) * 2.6;
+        var dy2 = 0.9 + Math.random() * 1.7;
+        var dz2 = (Math.random() - 0.5) * 2.6;
+        var len2 = 3.5 + Math.random() * 5;
+        for (var q2 = 0; q2 < 5; q2++) {
+          var t2 = q2 / 4;
+          pts.push([bx2 + dx2 * len2 * t2, by2 + dy2 * len2 * t2, bz2 + dz2 * len2 * t2, 0]);
+        }
+      }
+    } else {
+      // expert: wild fuzzy halo following the head
+      for (var j = 0; j < 340; j++) {
+        var uu3 = Math.random() * 2 - 1;
+        var th4 = Math.random() * Math.PI * 2;
+        var s4 = Math.sqrt(Math.max(0, 1 - uu3 * uu3));
+        var rr = R + 1.2 + Math.random() * 3.3;
+        var y = rr * uu3 * (ry / R);
+        var x = rr * s4 * Math.cos(th4) * (rx / R);
+        var z = rr * s4 * Math.sin(th4);
+        if (y > -R * 0.35 && z < R * 0.4) pts.push([x, y, z, 0]);
+      }
     }
 
     // nose (protruding, bright)
@@ -232,6 +271,9 @@
       f.assignHomes();
       f.reactStart = performance.now();
     };
+    f.hide = function () {
+      f.reactStart = performance.now() - ASSEMBLE - HOLD;
+    };
     return f;
   }
 
@@ -332,6 +374,7 @@
 
   window.TrizFace = {
     set: function (e) { expert.set(e); },
+    hide: function () { expert.hide(); },
   };
 
   window.TrizSkeptic = {

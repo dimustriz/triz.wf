@@ -1,0 +1,13 @@
+# Serve always-fresh JS/CSS on the custom domain.
+# Cloudflare Pages defaults custom-domain assets to a 4-hour edge cache,
+# which makes triz.wf look "stale" compared to *.pages.dev (max-age=0).
+/app.js
+  Cache-Control: public, max-age=0, must-revalidate
+/graph.js
+  Cache-Control: public, max-age=0, must-revalidate
+/about.js
+  Cache-Control: public, max-age=0, must-revalidate
+/menu.js
+  Cache-Control: public, max-age=0, must-revalidate
+/style.css
+  Cache-Control: public, max-age=0, must-revalidate
